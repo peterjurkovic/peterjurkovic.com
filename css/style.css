@@ -4,16 +4,26 @@
 
 *{border: 0;margin: 0}
 html{height: 100%;}
-body{font-family: 'Dosis', sans-serif;background: #2b2d35;color: #ddd;height: 100%;}
+body{font-family: 'Dosis', sans-serif;background: #2b2d35;color: #ddd;height: 100%;font-size: 100%}
 a{text-decoration: none;color: #ddd;}
 
 
 .blind { left: -5000px;position: absolute; top: -5000px;}
 
-
+.pj-border{background: #303239;height: 19px;width: 100%;}
 .page-wrapp{max-width: 980px;width: 100%;margin: auto;}
-
-
+.pj-inline-block{display: inline-block;}
+.pj-block{display: block;}
+.clearfix:after{ 
+   content: "."; 
+   visibility: hidden; 
+   display: block; 
+   height: 0; 
+   clear: both;
+}
+/* -----------------------------------
+	NAV
+*/
 nav{border-bottom: 1px solid #34363d;}
 nav, 
 nav #logo,
@@ -39,3 +49,56 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 .pj-social a{width:100%;display:block;padding-top:11px;height:39px;}
 .pj-social a:hover{background-color:#ddd}
 .pj-social a:hover span{background-color:#000;}
+
+
+/* -----------------------------------
+	ABOUT / SKILLS
+*/
+.pj-text{max-width:440px;text-align:center;float: left;}
+.pj-text p{padding:25px 0 0 25px;font-size:1.2em;}
+.pj-title{max-width:383px;width:100%;display:inline-block;height:110px;padding-top:20px;margin:25px 0 0 52px;position:relative;border-right:5px solid #303239;border-bottom:5px solid #303239;background:#292b33}
+.pj-title .left-bg{height:130px;width:52px;background:url(../img/about-title-left-bg.png);position:absolute;left:-52px;top:0}
+.pj-title{font-size:2.2em;text-transform: uppercase;font-weight:normal;}
+.pj-title .pj-font-small{font-size:.7em}
+.pj-title .pj-block{font-size:1.2em}
+.pj-title .web{color:#f4ac42;}
+.pj-title .mobile{color:#a2b217;}
+.pj-title .java{color:#55a370;}
+
+
+#about .page-wrapp{background:url(../img/skills-bg.png) no-repeat right center;min-height:460px;}
+
+.pj-skills{max-width: 420px;min-height: 329px;float: right;width: 100%;margin:55px 40px 0 0;}
+#skill-wrapp{max-width: 420px;height: 329px;position: relative;}
+#skill-wrapp *{position:absolute;background-repeat: no-repeat;}
+
+.pj-java{width:83px;height:168px;background:black;top:35px;left:168px;background-color:#e74c2e;background-image: url(../img/skill-java.png);background-position: 0 center}
+.pj-html5{width:43px;height:119px;background:black;top:0px;left:251px;background-color:#cf4858;background-image: url(../img/skill-html5.png);background-position: 0 center}
+.pj-jquery-mobile{width:78px;height:75px;background:black;top:44px;left:294px;background-color:#b31b28;background-image: url(../img/skill-jquerymobile.png);background-position: center 0}
+.pj-maven{width:84px;height:84px;background:black;top:119px;left:251px;background-color:#f18729;background-image: url(../img/skill-maven.png);background-position: center 0}
+.pj-php{width:84px;height:42px;background:black;top:119px;left:335px;background-color:#80628b;background-image: url(../img/skill-php.png);background-position: center 0}
+.pj-postgres{width:35px;height:33px;background:black;top:161px;left:335px;background-color:#544858;background-image: url(../img/skill-postgres.png);background-position: center 0}
+.pj-hibernate{width:156px;height:71px;background:black;top:203px;left:168px;background-color:#1b6a81;background-image: url(../img/skill-hibernate.png);background-position: center 0}
+.pj-tika{width:43px;height:42px;background:black;top:243px;left:125px;background-color:#31555f;background-image: url(../img/skill-tika.png);background-position: center 0}
+.pj-photoshop{width:40px;height:83px;background:black;top:243px;left:85px;background-color:#467887;background-image: url(../img/skill-photoshop.png);background-position: center}
+.pj-spring{width:83px;height:83px;background:black;top:160px;left:85px;background-color:#55a370;background-image: url(../img/skill-spring.png);background-position: center 0}
+.pj-tomcat{width:60px;height:56px;background:black;top:160px;left:25px;background-color:#b1c667;background-image: url(../img/skill-tomcat.png);background-position: center 0}
+.pj-android{width:168px;height:41px;background:black;top:119px;left:0px;background-color:#a2b217;background-image: url(../img/skill-android.png);background-position: center 0}
+.pj-jquery{width:85px;height:100px;background:black;top:19px;left:83px;background-color:#f2c230;background-image: url(../img/skill-jquery.png);background-position: 10px 0 }
+.pj-less{width:41px;height:41px;background:black;top:78px;left:42px;background-color:#f4ac42;background-image: url(../img/skill-less.png) ;}
+
+
+.pj-java:hover{background-position: -83px center;background-color: #fff;}
+.pj-html5:hover{background-position: -41px center;background-color: #c7381c;}
+.pj-jquery-mobile:hover{background-position: center -75px;background-color: #eee;}
+.pj-maven:hover{background-position: center -84px;background-color: #ddd;}
+.pj-php:hover{background-position: center -42px;background-color: #520ab5;}
+.pj-postgres:hover{background-position: center -32px;background-color: #fff;}
+.pj-hibernate:hover{background-position: center -71px;background-color: #fff;}
+.pj-tika:hover{background-position: center -42px;background-color: #b1c667;}
+.pj-photoshop:hover{background-color: #313e6c;}
+.pj-spring:hover{background-position: center -78px;background-color: #0c702f;}
+.pj-tomcat:hover{background-position: center -54px;background-color: #3b903b;}
+.pj-android:hover{background-position: center -42px;background-color: #fff;}
+.pj-jquery:hover{background-position: 12px -101px;background-color: #be571e;}
+.pj-less:hover{background-position: 0 -40px;background-color: #b31b28;}
