@@ -12,7 +12,9 @@ $(function() {
 	$skills.hover(showSkillTip, hideSkillTip) ;
 
 
-	//$wrapp.on("div", "mouseenter", showSkillTip);
+	$(document).on("click", ".pj-email", function(){
+		$(this).attr("href", "mailto:email@peterjurkovic.sk");
+	});
 	//$wrapp.on("div", "mouseleave", hideSkillTip);
 });
 
