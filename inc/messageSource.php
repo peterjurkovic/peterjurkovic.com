@@ -10,6 +10,7 @@
 		$messages["en"] = array(
 			"yes" => "Yes",
 			"no" => "No",
+			"unexpectedError" => "Some error occured, try it again leater please"
 		);
 
 		$key = $args[0];

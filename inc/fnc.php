@@ -40,6 +40,16 @@
 		echo $html;
 	}
 
+	function getProjects($offset){
+		global $conn, $lang;
+		$projects = getArticle("categ", 34, $lang);
+		$html = '';
+		for($i = $offset; count($projects) > $i; $i++){
+			$html .= getProject($projects[$i]);
+		}
+		return $html;
+	}
+
 
 	function getProject($article){
 		return '<div class="pj-project hidden" data-image="'.$article["avatar1"].'">'.

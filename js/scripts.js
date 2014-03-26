@@ -13,6 +13,7 @@ $(function() {
 
 
 	$(document).on("click", ".pj-email", appendEmailAddress );
+	$(document).on("click", ".pj-asyncload", loadOther );
 	$(document).on("mouseleave", ".pj-project", hideProjectDescr );
 	$(document).on("mouseenter", ".pj-project", showProjectDescr );
 	
@@ -31,6 +32,7 @@ function showProjectDescr(e){
 	e.preventDefault();
 	var $this = $(this);
 	$this.addClass( !isOnLeftSide($this) ? 'pj-leftside' : 'pj-rightside');
+	$this.removeClass( isOnLeftSide($this) ? 'pj-leftside' : 'pj-rightside');
 	$this.find('.pj-project-tech div').each(function(i){
 		$(this)
 		.transition({ x: 10 + i,  delay: 0 })
@@ -129,11 +131,11 @@ function animateSkills(){
 
 
 function renderProjects(){
-	$items = $('.pj-project');
+	$items = $('.pj-project.hidden');
 	$items.each(function(){
 		var $this = $(this);
 		$this.removeClass("hidden")
-			 .css('background-image', 'url(../data/' + $this.attr("data-image"))
+			 .css('background-image', 'url(../data/avatars/' + $this.attr("data-image"))
 			 .transition({ opacity: 0 })
 			 .transition({ opacity: 1 });
 	});
@@ -153,5 +155,38 @@ function showLoader(){
 }
 function hideLoader(){
 	$('#pj-loader').remove();
+	return false;
+}
+
+
+function loadOther(){
+	showLoader();
+	var data = {
+		lang : $(this).attr("data-lang"),
+		act : 1
+	};
+	var jqxhr = $.ajax({
+			type: 'GET',
+			url : '/inc/ajax.php',
+			data : data,
+			contentType: "application/json"
+	})
+	.done(function(json) {
+		console.log('OK!');
+		json = $.parseJSON(json);
+		if(json.err == 0){
+			console.log('appending..');
+			$('.pj-projects').append(json.html);
+			renderProjects();
+		}
+	})
+	.fail(function(xhr, statusText, e) {
+    	console.warn('Some error occured.');
+    	console.warn(statusText);
+	})
+	.complete(function(e) {
+		console.log(e);
+		setTimeout(hideLoader, 500);
+	});
 	return false;
 }

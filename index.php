@@ -89,7 +89,7 @@
 					<?php echo printProjects(); ?>
 				</div>
 				<div class="clearfix"></div>
-			
+				<a href="" class="pj-asyncload" data-lang="<?php echo $lang; ?>">Load other</a>
 			</div>
 		</section>
 
