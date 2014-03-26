@@ -12,17 +12,30 @@ $(function() {
 	$skills.hover(showSkillTip, hideSkillTip) ;
 
 
-	$(document).on("click", ".pj-email", function(){
-		$(this).attr("href", "mailto:email@peterjurkovic.sk");
-	});
-	//$wrapp.on("div", "mouseleave", hideSkillTip);
+	$(document).on("click", ".pj-email", appendEmailAddress );
+	$(document).on("mouseleave", ".pj-project", showProjectDescr );
+	$(document).on("mouseenter", ".pj-project", hideProjectDescr );
+	
 });
+
+function showProjectDescr(){
+	var $this = $(this);
+	//$('<div>text</div>').appendTo($this);
+}
+
+function hideProjectDescr(){
+
+}
 
 function swapColors($skills){
 	$skills.each(function(){
 		var $this = $(this);
 		$this.data('color-bg', $this.css("background-color"));
 	});
+}
+
+function appendEmailAddress(){
+	$(this).attr("href", "mailto:email@peterjurkovic.sk");
 }
 
 function showSkillTip(){
