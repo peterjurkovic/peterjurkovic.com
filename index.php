@@ -85,25 +85,11 @@
 			<div class="page-wrapp">
 				<h2><?php echo printPageTitle(34); ?></h2>
 				
-				<div class="clear">
-					<div class="pj-project hidden" data-image="attendence">
-						<div class="pj-project-hover"></div>
-						<div class="pj-project-tech pj-java"></div>
-						<div class="pj-project-tech pj-spring"></div>
-						<div class="pj-project-tech pj-hibernate"></div>
-						<div class="pj-project-tech pj-postgre"></div>
-						<div class="pj-project-tech pj-tomcat"></div>
-						<div class="pj-project-tech pj-tika"></div>
-					</div>
-					<div class="pj-project hidden" data-image="cms"></div>
-					<div class="pj-project hidden" data-image="colormix"></div>
-					<div class="pj-project hidden" data-image="cpr"></div>
-					<div class="pj-project hidden" data-image="dajan"></div>
-					<div class="pj-project hidden" data-image="dril"></div>
-					<div class="pj-project hidden" data-image="drilapp"></div>
-					<div class="pj-project hidden" data-image="siesta"></div>
-					<div class="pj-project hidden" data-image="topreality"></div>
+				<div class="pj-projects">
+					<?php echo printProjects(); ?>
 				</div>
+				<div class="clearfix"></div>
+			
 			</div>
 		</section>
 

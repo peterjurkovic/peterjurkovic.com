@@ -15,4 +15,12 @@
 	}
 	
 
+	function getSkillsByArticleId($conn, $id){
+		$sql = "SELECT s.* ".
+			   "FROM  `project_skill` pj ".
+			   "LEFT JOIN skill s ON s.id = pj.id_skill ".
+			   "WHERE id_article =?";
+		return $conn->select($sql, array($id));
+	}
+
 ?>

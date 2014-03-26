@@ -13,18 +13,39 @@ $(function() {
 
 
 	$(document).on("click", ".pj-email", appendEmailAddress );
-	$(document).on("mouseleave", ".pj-project", showProjectDescr );
-	$(document).on("mouseenter", ".pj-project", hideProjectDescr );
+	$(document).on("mouseleave", ".pj-project", hideProjectDescr );
+	$(document).on("mouseenter", ".pj-project", showProjectDescr );
 	
 });
 
-function showProjectDescr(){
+function isOnLeftSide($this){
+	var pos = $this.position(),
+		windowWidth = $(document).outerWidth();
+	if(windowWidth / 2 > pos.left){
+		return true;
+	}
+	return false;
+}
+
+function showProjectDescr(e){
+	e.preventDefault();
 	var $this = $(this);
-	//$('<div>text</div>').appendTo($this);
+	$this.addClass( !isOnLeftSide($this) ? 'pj-leftside' : 'pj-rightside');
+	$this.find('.pj-project-tech div').each(function(i){
+		$(this)
+		.transition({ x: 10 + i,  delay: 0 })
+		.transition({ x: 0,  delay: 10  * i});
+	})
+	
+	$this.find('.pj-project-hover,.pj-project-tech').show();
+	$('.pj-project').not($this).addClass('pj-transparent');
+	return false;
 }
 
 function hideProjectDescr(){
-
+	var $this = $(this);
+	$('.pj-project').not($this).removeClass('pj-transparent');
+	$this.find('.pj-project-hover, .pj-project-tech').hide();
 }
 
 function swapColors($skills){
@@ -112,8 +133,25 @@ function renderProjects(){
 	$items.each(function(){
 		var $this = $(this);
 		$this.removeClass("hidden")
-			 .css('background-image', 'url(../data/' + $this.attr("data-image") + '.png)')
+			 .css('background-image', 'url(../data/' + $this.attr("data-image"))
 			 .transition({ opacity: 0 })
 			 .transition({ opacity: 1 });
 	});
+}
+
+
+jQuery.fn.center = function () {
+    this.css("position","absolute");
+    this.css("top", (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop() + "px");
+    this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+    return this;
+}
+
+function showLoader(){
+	$('<div id="pj-loader" class="circle"><p>Loading...</p></div>').center().appendTo('body');
+	return false;
+}
+function hideLoader(){
+	$('#pj-loader').remove();
+	return false;
 }

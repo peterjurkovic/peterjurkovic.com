@@ -9,11 +9,13 @@ a{text-decoration: none;color: #ddd;}
 .circle{display:block;-webkit-border-radius: 50%;-moz-border-radius: 50%;border-radius: 50%;}
 .blind { left: -5000px;position: absolute; top: -5000px;}
 .clear{ overflow: hidden;display: inline-block;display: block;}
+.clearfix{clear: both;}
 .hidden{display: none;}
 .pj-border{background: #303239;height: 19px;width: 100%;}
 .page-wrapp{max-width: 980px;width: 100%;margin: auto;}
 .pj-inline-block{display: inline-block;}
 .pj-block{display: block;}
+.pj-transparent{opacity: .70 !important;}
 .clearfix:after{ 
    content: "."; 
    visibility: hidden; 
@@ -94,7 +96,8 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 .pj-android{background-color:#a2b217;background-image: url(../img/skill-android.png);background-position: center 0}
 .pj-jquery{background-color:#f2c230;background-image: url(../img/skill-jquery.png);background-position: 10px 0 }
 .pj-less{background-color:#f4ac42;background-image: url(../img/skill-less.png);}
-
+.pj-mysql{background-color:#015A84;}
+.pj-google-apis{background-color:#4584EE;}
 
 .pj-skills .pj-java{width:83px;height:168px;top:35px;left:168px;}
 .pj-skills .pj-html5{width:43px;height:119px;top:0px;left:251px;}
@@ -221,11 +224,37 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 
 #projects{background: url(../img/projects-bg.png);padding:10px 0;text-align:center;}
 #projects h2 span{background: url(../img/projects-bg.png);}
-#projects .clear{padding: 15px 0}
+#projects .pj-projects{padding: 15px 0}
 .pj-project{max-width:245px;position:relative;min-height:245px;background-position:center 0;background-repeat:no-repeat;width:100%;height:245px;display:inline-block;padding:0;border:0;margin-right: -4px;margin-bottom: -4px;}
 .pj-project:hover{background-position:center -245px;}
-.pj-project-hover{position: absolute;width: 245px;height: 245px;top:-2px;left:-2px;border:2px solid orange;z-index: 99;display: block;}
 
+.pj-project-hover,
+.pj-project-tech{position: absolute;display: none;}
+.pj-project-hover{width: 237px;height: 233px;top:0px;left:-5px;border:10px solid #2b2d35;z-index: 99;}
+.pj-project-tech{top:0;max-width:90px;width:100%;z-index:99;background:#2b2d35;height:243px;padding:5px;}
+.pj-project-tech div{padding:5px 0;background-image:none;}
+
+.pj-rightside .pj-project-tech{left:240px;}
+.pj-leftside .pj-project-tech{left:-95px;}
+
+.pj-leftside .pj-project-tech div{
+	-webkit-border-top-left-radius: 50px;
+	-webkit-border-bottom-left-radius: 50px;
+	-moz-border-radius-topright: 50px;
+	-moz-border-radius-bottomright: 50px;
+	border-top-left-radius: 50px;
+	border-bottom-left-radius: 50px;
+}
+.pj-rightside .pj-project-tech div{
+	-webkit-border-top-right-radius: 50px;
+	-webkit-border-bottom-right-radius: 50px;
+	-moz-border-radius-topright: 50px;
+	-moz-border-radius-bottomright: 50px;
+	border-top-right-radius: 50px;
+	border-bottom-right-radius: 50px;
+}
+
+.pj-project-tech .pj-dark{color:#2b2d35;}
 /* -----------------------------------
 	CONTACTS
 */
@@ -259,3 +288,6 @@ footer{background:#303239;min-height:50px;padding:30px 0 0 10px;font-size:.8em;c
 footer > div{position:relative;}
 #pj-share{float:right;position:absolute;right:10px;top:-10px}
 
+
+#pj-loader{z-index: 999; width: 100px;height: 100px;background: black url(../img/loader.gif) no-repeat center 18px;opacity:.9;border:10px solid #555;text-align:center;}
+#pj-loader p{font-size:.8em;padding-top:70px;}

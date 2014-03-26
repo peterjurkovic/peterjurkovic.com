@@ -24,10 +24,47 @@
 		$html = "";
 	
 		for($i = 0; count($skills) > $i; $i++){
-			$html .= '<div class="pj-'.$skills[$i]["code"].(isset($skills[$i]["css_class"]) ?  ' ' .$skills[$i]["css_class"] : '').
+			$html .= '<div class="'.getSkillCssClasses($skills[$i]).
 					 ' " data-skill="'.$skills[$i]["name"].'"></div>'."\n";		
 		}	
 		return $html;	
+	}
+
+	function printProjects(){
+		global $conn, $lang;
+		$projects = getArticle("categ", 34, $lang);
+		$html = '';
+		for($i = 0; 8 > $i; $i++){
+			$html .= getProject($projects[$i]);
+		}
+		echo $html;
+	}
+
+
+	function getProject($article){
+		return '<div class="pj-project hidden" data-image="'.$article["avatar1"].'">'.
+				'<div class="pj-project-hover"></div>'.
+				getSkilss($article['id_article']).
+				'</div>';
+	}
+
+
+
+	function getSkilss($idArticle){
+		global $conn;
+		$skills = getSkillsByArticleId($conn, $idArticle);
+		if(count($skills) == 0){
+			return '';
+		}
+		$html = '<div class="pj-project-tech">';
+		for($i = 0; count($skills) > $i; $i++){
+			$html .= '<div class="'.getSkillCssClasses($skills[$i]).'">'.$skills[$i]['name'].'</div>';
+		}
+		return $html."</div>";
+	}
+
+	function getSkillCssClasses($skill){
+		return 'pj-'.$skill["code"].(isset($skill["css_class"]) ?  ' ' .$skill["css_class"] : '');
 	}
 	
 ?>
