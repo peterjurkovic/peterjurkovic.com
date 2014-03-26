@@ -1,9 +1,12 @@
 <?php
 
 	
-	function printContent(){
+	function printContent($id = null){
 		global $meta, $lang;
-		$article = getArticle("fullHidden", $meta['id_article'], $lang);
+		if($id == null){
+			$id = $meta['id_article'];
+		}
+		$article = getArticle("fullHidden", $id, $lang);
 		if(isset($article[0]) && isset($article[0]["content_$lang"])){
 			echo $article[0]["content_$lang"];
 		}
@@ -52,7 +55,9 @@
 
 
 	function getProject($article){
-		return '<div class="pj-project hidden" data-image="'.$article["avatar1"].'">'.
+		global $lang;
+		return '<div class="pj-project hidden" title="'.$article["title_$lang"].'" '.
+			   'style=" background-image: url(../data/avatars/'.$article["avatar1"].')">'.
 				'<div class="pj-project-hover"></div>'.
 				getSkilss($article['id_article']).
 				'</div>';

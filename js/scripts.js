@@ -1,6 +1,6 @@
 $(function() {
 	animateSkills();
-	renderProjects();
+	renderProjects(true);
 	$('h2').append('<span class="circle"></span>');
 
 	var $skills = $('#skill-wrapp div');
@@ -14,6 +14,7 @@ $(function() {
 
 	$(document).on("click", ".pj-email", appendEmailAddress );
 	$(document).on("click", ".pj-asyncload", loadOther );
+	$(document).on("click", "form a", sendEmail );
 	$(document).on("mouseleave", ".pj-project", hideProjectDescr );
 	$(document).on("mouseenter", ".pj-project", showProjectDescr );
 	
@@ -32,13 +33,7 @@ function showProjectDescr(e){
 	e.preventDefault();
 	var $this = $(this);
 	$this.addClass( !isOnLeftSide($this) ? 'pj-leftside' : 'pj-rightside');
-	$this.removeClass( isOnLeftSide($this) ? 'pj-leftside' : 'pj-rightside');
-	$this.find('.pj-project-tech div').each(function(i){
-		$(this)
-		.transition({ x: 10 + i,  delay: 0 })
-		.transition({ x: 0,  delay: 10  * i});
-	})
-	
+	$this.removeClass( isOnLeftSide($this) ? 'pj-leftside' : 'pj-rightside');	
 	$this.find('.pj-project-hover,.pj-project-tech').show();
 	$('.pj-project').not($this).addClass('pj-transparent');
 	return false;
@@ -130,15 +125,14 @@ function animateSkills(){
 }
 
 
-function renderProjects(){
-	$items = $('.pj-project.hidden');
-	$items.each(function(){
-		var $this = $(this);
-		$this.removeClass("hidden")
-			 .css('background-image', 'url(../data/avatars/' + $this.attr("data-image"))
-			 .transition({ opacity: 0 })
-			 .transition({ opacity: 1 });
-	});
+function renderProjects(timeout){
+	var $items = $('.pj-project.hidden');
+	if(timeout){
+		showLoader();
+		setTimeout(function() {$items.removeClass("hidden");hideLoader()}, 1000);
+	}else{
+		$items.removeClass("hidden");
+	}
 }
 
 
@@ -164,20 +158,20 @@ function loadOther(){
 	var data = {
 		lang : $(this).attr("data-lang"),
 		act : 1
-	};
-	var jqxhr = $.ajax({
+	},
+	$this = $(this),
+	jqxhr = $.ajax({
 			type: 'GET',
 			url : '/inc/ajax.php',
 			data : data,
 			contentType: "application/json"
 	})
 	.done(function(json) {
-		console.log('OK!');
 		json = $.parseJSON(json);
 		if(json.err == 0){
-			console.log('appending..');
 			$('.pj-projects').append(json.html);
-			renderProjects();
+			renderProjects(false);
+			$this.remove();
 		}
 	})
 	.fail(function(xhr, statusText, e) {
@@ -185,8 +179,92 @@ function loadOther(){
     	console.warn(statusText);
 	})
 	.complete(function(e) {
-		console.log(e);
 		setTimeout(hideLoader, 500);
 	});
 	return false;
+}
+
+
+function sendEmail(){
+	console.log('form clicked.');
+	var $form = $('form'),
+		data = renameArr( $form.serializeArray() );
+	if(!isValid($form)){
+		return false;
+	}
+	data.act = 2;
+	data.lang = $('body').attr("data-lang");
+	jqxhr = $.ajax({
+			type: 'GET',
+			url : '/inc/ajax.php',
+			data : data,
+			contentType: "application/json"
+	})
+	.done(function(json) {
+		json = $.parseJSON(json);
+		if(json.err == 0){
+			$('<p id="pj-success"></p>')
+			.text(json.msg)
+			.appendTo('form');
+			$form.find('input, textarea').val('');
+			setTimeout(function(){
+				$('#pj-success').remove();
+			}, 4000);
+
+		}
+	})
+	.fail(function(xhr, statusText, e) {
+    	console.warn('Some error occured.');
+    	console.warn(statusText);
+	})
+	.complete(function(e) {
+		setTimeout(hideLoader, 500);
+	});
+	return false;
+}
+
+
+
+
+function isValid(f){
+	var inputs = f.find('input, textarea'),
+	valid = true,
+	errorClass = 'pj-form-error',
+	vldt = {
+		required : function(v,i) {return {r : !!v ,  msg : 'All fields are required'};},
+		email	 : function(v,i) {return {r : v.match( /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/ ), msg : 'Invalid email address'};},
+		fiveplus : function(v,i) {return {r : v.length >= 5, msg : 'At least 5 characters'} ;}
+	};
+	f.find('#pj-errors').remove();
+	inputs.removeClass(errorClass);
+	inputs.each(function(){
+		var input = $(this),
+			val = input.val(),
+			cls = input.attr("class").split(' ');
+
+		for(i in cls){
+			if(vldt.hasOwnProperty(cls[i])){
+				var res = vldt[cls[i]](val,input);
+				if(!res.r){
+					if(f.find('#pj-errors').length === 0){
+						$('<p id="pj-errors"></p>')
+						.text(res.msg)
+						.appendTo(f);
+					}
+					input.addClass(errorClass);
+					// showStatus({err : 1, msg : res.msg});
+					valid = false;
+				}
+			}
+		}
+	});
+	return valid;	
+}
+
+function renameArr(a){
+	var d = {};	
+	for (i in a) {
+		d[a[i].name] = a[i].value;
+	}
+	return d;
 }

@@ -10,7 +10,7 @@ a{text-decoration: none;color: #ddd;}
 .blind { left: -5000px;position: absolute; top: -5000px;}
 .clear{ overflow: hidden;display: inline-block;display: block;}
 .clearfix{clear: both;}
-.hidden{display: none;}
+.hidden{display: none !important;}
 .pj-border{background: #303239;height: 19px;width: 100%;}
 .page-wrapp{max-width: 980px;width: 100%;margin: auto;}
 .pj-inline-block{display: inline-block;}
@@ -255,7 +255,12 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 	border-bottom-right-radius: 50px;
 }
 
+.pj-asyncload,
 .pj-project-tech .pj-dark{color:#2b2d35;}
+
+.pj-asyncload{font-weight:bold;text-decoration:underline;text-transform:uppercase;font-size:.9em;margin:10px;display:inline-block;padding:5px;}
+.pj-asyncload:hover{text-decoration:none;color:#fff;background:#e74c2e;}
+
 /* -----------------------------------
 	CONTACTS
 */
@@ -277,9 +282,19 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 form{width: 100%;text-align: center;position:relative;}
 form a{display;block;background:url(../img/btn-send.png);position:absolute;bottom:-40px;right:20%;height:24px;padding:5px 0 15px 0;width:102px;text-align:center;}
 form a:hover{background-position: 0 -44px;}
-input, textarea{font-size:1em; border-width:0px;border:none;padding:15px;background: #535862;display: inline-block;max-width: 300px;width: 100%;margin:5px 0;color:#272930;font-family: 'Dosis', sans-serif;}
+input, textarea{font-size:1em; border-width:0px;border:none;padding:15px;background-color: #535862;display: inline-block;max-width: 300px;width: 100%;margin:5px 0;color:#272930;font-family: 'Dosis', sans-serif;}
 textarea{min-height:80px;margin-top:20px;}
+.pj-form-error{background-image: url(../img/form-error.png); background-repeat:no-repeat; }
+input.pj-form-error{background-position:left center;}
+textarea.pj-form-error{background-position:left 10px!important;}
 
+
+#pj-errors,
+#pj-success{
+	position: absolute;bottom: -35px;right: 44%;display: block;padding: 5px 10px !important;font-size:.8em;	
+}
+#pj-errors{background: #b95050;color: #fff;}
+#pj-success{ background: #2d9c25;}
 
 /* -----------------------------------
 	FOOTER

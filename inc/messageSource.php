@@ -10,7 +10,9 @@
 		$messages["en"] = array(
 			"yes" => "Yes",
 			"no" => "No",
-			"unexpectedError" => "Some error occured, try it again leater please"
+			"unexpectedError" => "Some error occured, try it again leater please",
+			"invalidDataError" => "Invalid data",
+			"emailSent" => "Your message was sent successfully"
 		);
 
 		$key = $args[0];

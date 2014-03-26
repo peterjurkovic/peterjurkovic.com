@@ -15,7 +15,7 @@
 		<script src="js/scripts.js"></script>
 		<link rel="stylesheet" href="css/style.css" />
 	</head>
-	<body class="homepage">
+	<body class="homepage" data-lang="<?php echo $lang; ?>">
 		
 		<!-- NAVIGATION / SOCIAL -->
 		<nav>
@@ -98,25 +98,10 @@
 
 		<section id="contact">
 			<div class="page-wrapp">
-				<h2>Contact</h2>
+				<h2><?php echo printPageTitle(48); ?></h2>
 
 				<div class="clear">
-					<div class="pj-box">
-						<ul>
-							<li><span>name:</span><strong><span class="blind">java developer</span> Peter Jurkovič</strong></li>
-							<li><span>email:</span><a href="" class="pj-email"></a></li>
-							<li><span>phone:</span><strong class="pj-phone">+421 904 938 419</strong></li>
-						</ul>
-					</div>
-					<div class="pj-box">
-						<p>You can either shoot me an email using this form:</p>
-						<form>
-							<input type="text" placeholder="name" />
-							<input type="text" placeholder="e-mail" />
-							<textarea placeholder="message"></textarea>
-							<a href="#send">send</a>
-						</form>
-					</div>
+					<?php echo printContent(48); ?>
 				</div>
 
 			</div>
@@ -127,10 +112,7 @@
 		<footer>
 			<div class="page-wrapp">
 				<p>&copy; Peter Jurkovič 2014</p>
-
 				<div id="pj-share">
-					<!-- AddThis Button BEGIN -->
-				<!--
 					<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 					<a class="addthis_button_facebook"></a>
 					<a class="addthis_button_twitter"></a>
@@ -141,7 +123,6 @@
 					</div>
 					<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 					<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7805435b56a706"></script>
-				-->
 				</div>
 			</div>
 		</footer>
