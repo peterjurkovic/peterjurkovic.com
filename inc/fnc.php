@@ -56,7 +56,7 @@
 
 	function getProject($article){
 		global $lang;
-		return '<div class="pj-project hidden" title="'.$article["title_$lang"].'" '.
+		return '<div class="pj-project hidden" title="'.$article["title_$lang"].'" data-id="'.$article["id_article"].'" '.
 			   'style=" background-image: url(../data/avatars/'.$article["avatar1"].')">'.
 				'<div class="pj-project-hover"></div>'.
 				getSkilss($article['id_article']).

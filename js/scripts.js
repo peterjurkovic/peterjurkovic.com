@@ -1,24 +1,26 @@
-$(function() {
+$(init);
+
+
+function init(){
 	animateSkills();
 	renderProjects(true);
 	$('h2').append('<span class="circle"></span>');
-
 	var $skills = $('#skill-wrapp div');
-	
 	setTimeout(function(){
 		swapColors($skills);
 	}, 500);
-
 	$skills.hover(showSkillTip, hideSkillTip) ;
-
-
 	$(document).on("click", ".pj-email", appendEmailAddress );
 	$(document).on("click", ".pj-asyncload", loadOther );
 	$(document).on("click", "form a", sendEmail );
+	$(document).on("click", ".pj-project-tech, .pj-project-hover", showProjectDetail );
 	$(document).on("mouseleave", ".pj-project", hideProjectDescr );
 	$(document).on("mouseenter", ".pj-project", showProjectDescr );
-	
-});
+	$('<div class="remodal" data-remodal-id="modal"><article></article></div>').appendTo('body');
+	$('.remodal').remodal();
+	initProjectDetail();
+}
+
 
 function isOnLeftSide($this){
 	var pos = $this.position(),
@@ -31,9 +33,15 @@ function isOnLeftSide($this){
 
 function showProjectDescr(e){
 	e.preventDefault();
-	var $this = $(this);
-	$this.addClass( !isOnLeftSide($this) ? 'pj-leftside' : 'pj-rightside');
-	$this.removeClass( isOnLeftSide($this) ? 'pj-leftside' : 'pj-rightside');	
+	var $this = $(this),
+		isLeftSide = isOnLeftSide($this);
+	$this.addClass( !isLeftSide ? 'pj-leftside' : 'pj-rightside');
+	$this.removeClass( isLeftSide ? 'pj-leftside' : 'pj-rightside');	
+	$this.find('.pj-project-tech div').each(function(i){
+		var $skill = $(this);
+		$skill.transition({ x: ((i + 1) * (isLeftSide ? 1 : -1) ), delay : i * 10 })
+			  .transition({ x: 0 , delay : i * 10 });
+	});
 	$this.find('.pj-project-hover,.pj-project-tech').show();
 	$('.pj-project').not($this).addClass('pj-transparent');
 	return false;
@@ -126,12 +134,13 @@ function animateSkills(){
 
 
 function renderProjects(timeout){
-	var $items = $('.pj-project.hidden');
+	var $wrapp = $('#pj-project-wrapp'),
+		$items = $wrapp.find('.pj-project.hidden');
 	if(timeout){
-		showLoader();
-		setTimeout(function() {$items.removeClass("hidden");hideLoader()}, 1000);
+		$wrapp.fadeOut();
+		setTimeout(function() {$items.removeClass("hidden");$wrapp.fadeIn(1000)}, 1000);
 	}else{
-		$items.removeClass("hidden");
+		$items.removeClass("hidden").fadeOut().fadeIn(1500);
 	}
 }
 
@@ -159,27 +168,14 @@ function loadOther(){
 		lang : $(this).attr("data-lang"),
 		act : 1
 	},
-	$this = $(this),
-	jqxhr = $.ajax({
-			type: 'GET',
-			url : '/inc/ajax.php',
-			data : data,
-			contentType: "application/json"
-	})
-	.done(function(json) {
+	$this = $(this);
+	executeRequest(data, function(json) {
 		json = $.parseJSON(json);
 		if(json.err == 0){
 			$('.pj-projects').append(json.html);
 			renderProjects(false);
 			$this.remove();
 		}
-	})
-	.fail(function(xhr, statusText, e) {
-    	console.warn('Some error occured.');
-    	console.warn(statusText);
-	})
-	.complete(function(e) {
-		setTimeout(hideLoader, 500);
 	});
 	return false;
 }
@@ -194,13 +190,7 @@ function sendEmail(){
 	}
 	data.act = 2;
 	data.lang = $('body').attr("data-lang");
-	jqxhr = $.ajax({
-			type: 'GET',
-			url : '/inc/ajax.php',
-			data : data,
-			contentType: "application/json"
-	})
-	.done(function(json) {
+	executeRequest(data, function(json) {
 		json = $.parseJSON(json);
 		if(json.err == 0){
 			$('<p id="pj-success"></p>')
@@ -212,19 +202,61 @@ function sendEmail(){
 			}, 4000);
 
 		}
-	})
-	.fail(function(xhr, statusText, e) {
-    	console.warn('Some error occured.');
-    	console.warn(statusText);
-	})
-	.complete(function(e) {
-		setTimeout(hideLoader, 500);
 	});
 	return false;
 }
 
+function showProjectDetail(){
+	var id = null;
+	if(arguments.length === 1){
+		id = parseInt( arguments[0], 10);
+	}
+	showLoader();
+	var $this = $(this),
+		data = {
+			id : (isNaN(id) ?  $this.parent().attr('data-id') : id ),
+			lang : $('body').attr("data-lang"),
+			act : 3,
+	};
+	console.log(data);
+	setTimeout(function(){
+		executeRequest(data, function(json) {
+			json = $.parseJSON(json);
+			if(json.err == 0){
+			 	$('.remodal').find('article').html(json.html);
+			 	if(!isHashSet()){
+			 		location.hash = 'project-' + data.id;
+			 	}
+			 	getModalBoxInstance().open();
+			}
+		});
+	}, 500);
+	return false;
+}
 
 
+function executeRequest(data, callBack){
+	$.ajax({
+			type: 'GET',
+			url : '/inc/ajax.php',
+			data : data,
+			contentType: "application/json"
+	})
+	.done( callBack )
+	.fail(function(xhr, statusText, e) {
+    	console.warn('Some error occured.');
+    	console.warn(statusText);
+    	console.warn(e);
+	})
+	.complete(function(e) {
+		setTimeout(hideLoader, 400);
+	});
+}
+
+
+function getModalBoxInstance(){
+	return $.remodal.lookup[$('[data-remodal-id=modal]').data('remodal')];
+}
 
 function isValid(f){
 	var inputs = f.find('input, textarea'),
@@ -267,4 +299,15 @@ function renameArr(a){
 		d[a[i].name] = a[i].value;
 	}
 	return d;
+}
+
+function initProjectDetail(){
+	if(isHashSet()){
+		 var data = location.hash.replace("#", "").split("-");
+         showProjectDetail(data[1]);
+	}
+}
+
+function isHashSet(){
+    return /^#[a-z]{1,10}\-\d{1,3}$/.test( location.hash );
 }

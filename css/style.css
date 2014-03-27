@@ -1,5 +1,6 @@
 @charset 'UTF-8';
 @import url(http://fonts.googleapis.com/css?family=Dosis);
+@import url("jquery.remodal.css");
 
 
 *{border: 0;margin: 0}
@@ -23,6 +24,13 @@ a{text-decoration: none;color: #ddd;}
    height: 0; 
    clear: both;
 }
+
+.remodal article a,
+.pj-asyncload,
+.pj-project-tech .pj-dark{color:#2b2d35 !important;}
+
+.pj-asyncload:hover,
+.remodal article a:hover{text-decoration:none;color:#fff;background:#e74c2e;}
 
 h2{max-width: 210px;background: #303239;margin:auto;font-size:1em;text-transform:uppercase;width:100%;text-align:center;padding:7px 0;position:relative;}
 h2 span{position:absolute;width:22px;height:22px;top:-18px;left:44%}
@@ -229,14 +237,33 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 .pj-project{max-width:245px;position:relative;min-height:245px;background-position:center 0;background-repeat:no-repeat;width:100%;height:245px;display:inline-block;padding:0;border:0;margin-right: -4px;margin-bottom: -4px;}
 .pj-project:hover{background-position:center -245px;}
 
+
 .pj-project-hover,
 .pj-project-tech{position: absolute;display: none;}
-.pj-project-hover{width: 237px;height: 233px;top:0px;left:-5px;border:10px solid #2b2d35;z-index: 99;}
-.pj-project-tech{top:0;max-width:90px;width:100%;z-index:99;background:#2b2d35;height:243px;padding:5px;}
-.pj-project-tech div{padding:5px 0;background-image:none;}
+.pj-project-hover{width: 245px;height: 245px;top:0;z-index: 99;background-image: url(../img/project-hover.png);background-repeat:no-repeat;}
+.pj-project-tech{top:0;left: 0;max-width:85px;width:100%;z-index:99;background:#2b2d35;height:239px;padding:3px;opacity:.85;}
+.pj-project-tech div{background-image:none;}
+
+.pj-rightside .pj-project-hover{background-position: right 0;}
+.pj-leftside .pj-project-hover{background-position:left -245px;}
 
 .pj-rightside .pj-project-tech{left:240px;}
-.pj-leftside .pj-project-tech{left:-95px;}
+.pj-leftside .pj-project-tech{left:-90px;}
+
+.pj-rightside .pj-project-tech{-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-right-radius: 8px;
+	-moz-border-radius-topright: 8px;
+	-moz-border-radius-bottomright: 8px;
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+}
+.pj-leftside .pj-project-tech{-webkit-border-top-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 8px;
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-bottomleft: 8px;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
 
 .pj-leftside .pj-project-tech div{
 	-webkit-border-top-left-radius: 50px;
@@ -245,6 +272,7 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 	-moz-border-radius-bottomright: 50px;
 	border-top-left-radius: 50px;
 	border-bottom-left-radius: 50px;
+	padding:5px 0 5px 10px;
 }
 .pj-rightside .pj-project-tech div{
 	-webkit-border-top-right-radius: 50px;
@@ -253,13 +281,13 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 	-moz-border-radius-bottomright: 50px;
 	border-top-right-radius: 50px;
 	border-bottom-right-radius: 50px;
+	padding:5px 10px 5px 0;
 }
 
-.pj-asyncload,
-.pj-project-tech .pj-dark{color:#2b2d35;}
+
 
 .pj-asyncload{font-weight:bold;text-decoration:underline;text-transform:uppercase;font-size:.9em;margin:10px;display:inline-block;padding:5px;}
-.pj-asyncload:hover{text-decoration:none;color:#fff;background:#e74c2e;}
+
 
 /* -----------------------------------
 	CONTACTS
@@ -307,3 +335,20 @@ footer > div{position:relative;}
 
 #pj-loader{z-index: 999; width: 100px;height: 100px;background: black url(../img/loader.gif) no-repeat center 18px;opacity:.9;border:10px solid #555;text-align:center;}
 #pj-loader p{font-size:.8em;padding-top:70px;}
+
+
+
+/* MODAL BOX */
+
+.remodal article{}
+.remodal article h3{border-bottom:5px solid #ddd;padding:10px 0;font-weight:bold;font-size:1.5em;margin-bottom:10px}
+.remodal article a{text-decoration:underline;}
+.remodal article a:hover{color:#fff !important;}
+.remodal article table{background:#eee;width:100%;padding:5px;border-collapse:collapse;margin:10px 0}
+.remodal article td{padding:5px;}
+.remodal article td:first-child{width:30%;background:#ddd;} 
+.remodal article tr{border-bottom:1px solid #fff;} 
+.remodal .pj-project-tech{display:block;position:relative;width:100%;height:auto;max-width:100%;background:none;}
+.remodal .pj-project-tech div{display:inline-block;padding:5px 15px;color:#fff;}
+.remodal .pj-project-tech div:hover{background: #2b2d35;color:#fff !important;}
+

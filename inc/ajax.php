@@ -25,26 +25,28 @@ try{
     }
 
     $conn = Database::getInstance($config['db_server'], $config['db_user'], $config['db_pass'], $config['db_name']);
-    
-    if($_GET['act'] == 1){
-      
-      
 
-      $data = array(
-        "err" => 0,
-        "html" => getProjects(9)
-      );
-    }
-
-    if($_GET['act'] == 2){
+    switch (intval($_GET['act'])) {
       
-      if(empty($_GET['email']) || empty($_GET['name']) ||
-         empty($_GET['message']) || !isEmail($_GET['email'])){
+      /* Loading project items */
+      case 1:
+          $data = array(
+            "err" => 0,
+            "html" => getProjects(9)
+          );
+      break;
+
+
+
+      /* SENDS EMAIL */
+      case 2:
+          if(empty($_GET['email']) || empty($_GET['name']) ||
+              empty($_GET['message']) || !isEmail($_GET['email'])){
           echo json_encode( array( "err" => 1, "msg" => getMessage("invalidDataError")) );
           exit;
-      } 
-      $conf = getConfig($conn, "config", "page");
-      if($_SERVER['REMOTE_ADDR']  != "127.0.0.1"){
+          } 
+          $conf = getConfig($conn, "config", "page");
+          if($_SERVER['REMOTE_ADDR']  != "127.0.0.1"){
             $mail = new PHPMailer();
             $mail->From = $_GET['email'];
             $mail->FromName = $_GET['name'];
@@ -54,14 +56,36 @@ try{
             $mail->Subject = "Message form peterjurkovic.com";
             $mail->Body    = $_GET['message'];
             $mail->Send(); 
-      }
+        }
 
-      $data = array(
-        "err" => 0,
-        "msg" => getMessage("emailSent")
-      );
+        $data = array(
+          "err" => 0,
+          "msg" => getMessage("emailSent")
+        );
+        break;
+
+
+
+        /* Prepare project detail */
+        case 3:
+          $id = intval($_GET['id']);
+          $article = getArticle("fullHidden", $id , $lang);
+          $html = '<h3>'.$article[0]["title_$lang"].'</h3>';
+          $html .= $article[0]["content_$lang"];
+          $html .= getSkilss($id);
+          $data = array(
+            "err" => 0,
+            "html" => $html
+          );
+        break;
+
+
+
+      default:
+        throw new Exception("Unknown operation", 1);
+      break;
     }
-
+    
 }catch(MysqlException $ex){
     $data = array( "err" => 1, "msg" => $str[$lang]["err_db"] );
 }catch(Exception $ex){

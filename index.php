@@ -8,14 +8,18 @@
 		<meta name="keywords" content="java developer, Android developer, Peter Jurkovic, freelance" />
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		<meta name="robots"   content="index,follow"/>
+		
 		<link rel="author" href="https://plus.google.com/115805190454646553254/about"  title="Peter Jurkovič"/>
 		<link rel="shortcut icon" href="/img/icon.png" />
+		<link rel="stylesheet" href="css/style.css" />
+
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 		<script src="js/jquery.transit.min.js"></script>
+		<script src="js/jquery.remodal.js"></script>
 		<script src="js/scripts.js"></script>
-		<link rel="stylesheet" href="css/style.css" />
+		
 	</head>
-	<body class="homepage" data-lang="<?php echo $lang; ?>">
+	<body class="homepage remodal-bg" data-lang="<?php echo $lang; ?>">
 		
 		<!-- NAVIGATION / SOCIAL -->
 		<nav>
@@ -63,11 +67,6 @@
 						<span class="pj-block">Developer</span>
 					</strong>
 					<?php printContent(); ?>
-					<!--
-					<p>
-						My name is Peter<span class="blind"> Jurkovič</span>, I am 26 years old and I am a web, mobile and javaEE developer from Slovakia. Ever since I was a child I have been interested in web technologies. Last three years I’ve been  focusing on Java platform. In my free time I play with  Android SDK.
-					</p>
-					-->
 				</div>
 				<div class="pj-skills">
 					<div id="skill-wrapp">
@@ -85,7 +84,7 @@
 			<div class="page-wrapp">
 				<h2><?php echo printPageTitle(34); ?></h2>
 				
-				<div class="pj-projects">
+				<div id="pj-project-wrapp" class="pj-projects">
 					<?php echo printProjects(); ?>
 				</div>
 				<div class="clearfix"></div>
@@ -113,6 +112,7 @@
 			<div class="page-wrapp">
 				<p>&copy; Peter Jurkovič 2014</p>
 				<div id="pj-share">
+					<!--
 					<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 					<a class="addthis_button_facebook"></a>
 					<a class="addthis_button_twitter"></a>
@@ -123,8 +123,11 @@
 					</div>
 					<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 					<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7805435b56a706"></script>
+					 -->
 				</div>
 			</div>
 		</footer>
+		
+		
 	</body>
 </html>
