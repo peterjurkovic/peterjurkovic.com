@@ -65,10 +65,10 @@ function getOptions( $conn, $table, $colum, $first = 0, $skip = NULL){
 function printImages($array, $id, $baseDir){
 		$html = "";
 		foreach($array as $name){
-			$url = 		'../../data/'.$baseDir.'/'.$id.'/';
-			$html .= 	'<div class="ibox"><a href="'.$url.$name.'" title="Zobraziť obrázok" class="show hidden"></a>'.
+			$url = 		 $baseDir.'/'.$id.'/';
+			$html .= 	'<div class="ibox"><a href="/i/900-900-auto/'.$url.$name.'" title="Zobraziť obrázok" class="show hidden"></a>'.
 						'<a href="#aid'.$id.'" title="'.$url.$name.'" class="del hidden"></a>'. 
-						'<img class="img" src="./inc/img.php?url='.$url.$name.'&amp;w=100&amp;h=100&amp;type=crop" /></div>';
+						'<img class="img" src="/i/100-100-crop/'.$url.$name.'" /></div>';
 		}
 		return $html;
 }

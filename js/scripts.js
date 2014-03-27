@@ -16,6 +16,8 @@ function init(){
 	$(document).on("click", ".pj-project-tech, .pj-project-hover", showProjectDetail );
 	$(document).on("mouseleave", ".pj-project", hideProjectDescr );
 	$(document).on("mouseenter", ".pj-project", showProjectDescr );
+	$(document).on("mouseleave", "#gallery a", imageLeave );
+	$(document).on("mouseenter", "#gallery a", imageEnter );
 	$('<div class="remodal" data-remodal-id="modal"><article></article></div>').appendTo('body');
 	$('.remodal').remodal();
 	initProjectDetail();
@@ -182,7 +184,6 @@ function loadOther(){
 
 
 function sendEmail(){
-	console.log('form clicked.');
 	var $form = $('form'),
 		data = renameArr( $form.serializeArray() );
 	if(!isValid($form)){
@@ -218,7 +219,6 @@ function showProjectDetail(){
 			lang : $('body').attr("data-lang"),
 			act : 3,
 	};
-	console.log(data);
 	setTimeout(function(){
 		executeRequest(data, function(json) {
 			json = $.parseJSON(json);
@@ -310,4 +310,14 @@ function initProjectDetail(){
 
 function isHashSet(){
     return /^#[a-z]{1,10}\-\d{1,3}$/.test( location.hash );
+}
+
+function imageEnter() {
+	$('#gallery').find('a').not($(this)).addClass('pj-transparent');
+	return false;
+}
+
+function imageLeave() {
+	$('#gallery a').removeClass('pj-transparent');
+	return false;
 }

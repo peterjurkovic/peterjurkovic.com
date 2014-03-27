@@ -288,7 +288,6 @@
         
         if(isHashSet()){
             var data = location.hash.replace("#", "").split("-");
-                console.log(data);
                 hid = data[0];
                 pid = data[1];
         }

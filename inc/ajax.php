@@ -5,12 +5,17 @@ ini_set("display_errors", 1);
 require_once dirname(__FILE__)."/../admin/config.php";
 require_once dirname(__FILE__)."/../admin/page/fnc.page.php";
 require_once dirname(__FILE__)."/../admin/inc/class.Database.php";
+require_once dirname(__FILE__)."/../admin/inc/class.File.php";
 require_once dirname(__FILE__)."/../admin/inc/class.MysqlException.php";
 require_once dirname(__FILE__)."/../admin/inc/mailer/class.phpmailer.php";
 require_once dirname(__FILE__)."/../admin/inc/fnc.main.php";
 require_once dirname(__FILE__)."/../admin/inc/fnc.skill.php";
 require_once dirname(__FILE__)."/../inc/fnc.php";
 require_once dirname(__FILE__)."/../inc/messageSource.php";
+
+if($_SERVER["CONTENT_TYPE"] != "application/json"){
+  die();
+}
 
 $lang = "en";
 
@@ -73,6 +78,7 @@ try{
           $html = '<h3>'.$article[0]["title_$lang"].'</h3>';
           $html .= $article[0]["content_$lang"];
           $html .= getSkilss($id);
+          $html .= pritGallery($id, 200, 200, $article[0]["title_$lang"]);
           $data = array(
             "err" => 0,
             "html" => $html

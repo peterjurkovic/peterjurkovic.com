@@ -352,3 +352,7 @@ footer > div{position:relative;}
 .remodal .pj-project-tech div{display:inline-block;padding:5px 15px;color:#fff;}
 .remodal .pj-project-tech div:hover{background: #2b2d35;color:#fff !important;}
 
+/* GALLERY */
+
+#gallery{margin-top:20px;padding:10px 0;width:auto;background:#eee;border-top:3px dotted #ddd;border-bottom:10px solid #ddd;}
+#gallery a{width:200px;height:200px;display:inline-block;}

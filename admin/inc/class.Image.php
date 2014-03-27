@@ -298,7 +298,8 @@
 
 
 			## --------------------------------------------------------
-			private function finalizeImage($output = ""){
+			private function finalizeImage($output = NULL){
+				//exit('type ' . $this->type .'/'.IMAGETYPE_PNG);
 				switch($this->type){
 					  case IMAGETYPE_JPEG :
 							imagejpeg($this->imageResized, $output, 80);
