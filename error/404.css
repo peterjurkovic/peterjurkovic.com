@@ -1,0 +1,24 @@
+@charset 'UTF-8';
+@import url(http://fonts.googleapis.com/css?family=Dosis);
+
+
+*{border: 0;margin: 0}
+html{height: 100%;}
+body{font-family: 'Dosis', sans-serif;background: #2b2d35;color: #ddd;height: 100%;font-size: 100%}
+.page-wrapp{max-width: 980px;width: 100%;margin: auto;}
+
+nav{border-bottom: 1px solid #34363d;}
+nav, 
+nav #logo,
+.pj-social,
+.pj-social li{height: 50px;background-color: #24262d;}
+
+#logo{background: url(../img/logo.png) no-repeat center 0; width: 100%;display:block;}
+#logo:hover{background-position:center -50px;}
+
+section{min-height: 100px;text-align:center;margin-top:100px !important;padding:45px 45px 25px 45px;border:5px solid #34363d;max-width:300px;margin:auto;display:block;}
+section p{margin:15px 0;}
+section h1{font-size:2em;margin-top:-20px;}
+section a{margin-top:30px;display:block;font-weight:bold;color:#f18729;}
+section a:hover{text-decoration:none;color:#fff;}
+

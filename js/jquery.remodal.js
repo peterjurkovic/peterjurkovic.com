@@ -178,9 +178,7 @@
         this.modal.trigger("open");
 
         var id = this.modal.attr("data-" + pluginName + "-id");
-        if (id && this.settings.hashTracking) {
-            //location.hash = id;
-        }
+       
 
         if (current && current !== this) {
             current.overlay.hide();

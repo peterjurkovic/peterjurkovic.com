@@ -58,7 +58,7 @@
 		global $lang;
 		return '<div class="pj-project hidden" title="'.$article["title_$lang"].'" data-id="'.$article["id_article"].'" '.
 			   'style=" background-image: url(../data/avatars/'.$article["avatar1"].')">'.
-				'<div class="pj-project-hover"></div>'.
+				'<a href="#project-'.$article["id_article"].'" class="pj-project-hover"></a>'.
 				getSkilss($article['id_article']).
 				'</div>';
 	}
@@ -80,6 +80,11 @@
 
 	function getSkillCssClasses($skill){
 		return 'pj-'.$skill["code"].(isset($skill["css_class"]) ?  ' ' .$skill["css_class"] : '');
+	}
+
+	function incrementHit($articleId){
+		global $conn;
+		$conn->update("UPDATE article set hits=hits+1 where id_article=? LIMIT 1", array( $articleId ));
 	}
 	
 ?>

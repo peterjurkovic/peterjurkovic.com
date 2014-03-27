@@ -8,6 +8,13 @@
 		<meta name="keywords" content="java developer, Android developer, Peter Jurkovic, freelance" />
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0"/>
 		<meta name="robots"   content="index,follow"/>
+
+		<meta property="og:title" content="<?php  echo $meta["title_${lang}"]; ?>" />
+		<meta property="og:site_name" content="www.peterjurkovic.com" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://www.peterjurkovic.com" />
+		<meta property="fb:app_id"  content="148300471890790" /> 
+		<meta property="og:image" content="/img/sc.png" />
 		
 		<link rel="author" href="https://plus.google.com/115805190454646553254/about"  title="Peter Jurkovič"/>
 		<link rel="shortcut icon" href="/img/icon.png" />
@@ -15,9 +22,14 @@
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 		<script src="js/jquery.transit.min.js"></script>
-		<script src="js/jquery.remodal.js"></script>
-		<script src="js/scripts.js"></script>
-		
+		<script src="js/scripts.min.js"></script>
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		  ga('create', 'UA-7418246-1', 'peterjurkovic.com');ga('send', 'pageview');
+		</script>
 	</head>
 	<body class="homepage remodal-bg" data-lang="<?php echo $lang; ?>">
 		
@@ -95,6 +107,8 @@
 
 		<div class="pj-border"></div>
 
+
+		<!-- CONTACT -->
 		<section id="contact">
 			<div class="page-wrapp">
 				<h2><?php echo printPageTitle(48); ?></h2>
@@ -107,12 +121,11 @@
 		</section>	
 
 		
-
+		<!-- FOOTER -->
 		<footer>
 			<div class="page-wrapp">
 				<p>&copy; Peter Jurkovič 2014</p>
 				<div id="pj-share">
-					<!--
 					<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
 					<a class="addthis_button_facebook"></a>
 					<a class="addthis_button_twitter"></a>
@@ -123,7 +136,7 @@
 					</div>
 					<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
 					<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f7805435b56a706"></script>
-					 -->
+				
 				</div>
 			</div>
 		</footer>

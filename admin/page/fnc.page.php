@@ -32,11 +32,11 @@ function MAIN(){
 			if($_GET['a'] == "index")
 			{
 				$page = $conn->select("$q WHERE `link_${lang}`=? AND `active`=1 LIMIT 1", array( $_GET['p'] ));	
-				if(!$page) header("Location: /error/page.php?p=404");	
+				if(!$page) header("Location: /error/");	
 				$page[0]['id_parent'] = $page[0]["id_article"];	
 			}else{
 				$page = $conn->select("$q WHERE `id_article`=? AND `active`=1 LIMIT 1", array( $_GET['a'] ));
-				if(!$page) header("Location: /error/page.php?p=404");	
+				if(!$page) header("Location: /error/");	
 				$page[0]['id_parent'] = parentID($page[0]['sub_id']);
 			}
 			
@@ -54,7 +54,7 @@ function MAIN(){
 		}elseif($_GET['cn'] == "pview"){
 			// PRODUCT ---
 			$page = getProduct("full", $_GET['pid']);
-			if(!$page) header("Location: /error/page.php?p=404");
+			if(!$page) header("Location: /error/");
 			$p = parentMETA($page[0]["id_shop_category"]);
 			$page[0]['parentID'] = $p["id_shop_category"];
 			$page[0]['parentSubID'] = $p["sub_id"];
@@ -63,7 +63,7 @@ function MAIN(){
 		}elseif($_GET['cid'] == "index"){
 			// main category ---
 			$page = $conn->select("$q `link_sk`=? AND `active`=1 LIMIT 1", array( $_GET['cn'] ));
-			if(!$page) header("Location: /error/page.php?p=404");
+			if(!$page) header("Location: /error/");
 			$page[0]['parentID'] = $page[0]["id_shop_category"];
 			$page[0]['parentSubID'] = $page[0]["sub_id"];
 			$page[0]["header_sk"] = substr($page[0]["label"], 0, 200); 
@@ -71,7 +71,7 @@ function MAIN(){
 		}else{
 			// SUB CATEG ---
 			$page = $conn->select("$q `id_shop_category`=? AND `active`=1 LIMIT 1", array( $_GET['cid'] ));
-			if(!$page) header("Location: /error/page.php?p=404");
+			if(!$page) header("Location: /error/");
 			$p = parentMETA($page[0]["sub_id"]);
 			$page[0]['parentID'] = $p["id_shop_category"];
 			$page[0]['parentSubID'] = $p["sub_id"];

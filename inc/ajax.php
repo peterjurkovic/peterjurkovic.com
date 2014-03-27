@@ -75,10 +75,14 @@ try{
         case 3:
           $id = intval($_GET['id']);
           $article = getArticle("fullHidden", $id , $lang);
+          if(empty($article)){
+            break;
+          }
           $html = '<h3>'.$article[0]["title_$lang"].'</h3>';
           $html .= $article[0]["content_$lang"];
           $html .= getSkilss($id);
           $html .= pritGallery($id, 200, 200, $article[0]["title_$lang"]);
+          incrementHit($id);
           $data = array(
             "err" => 0,
             "html" => $html

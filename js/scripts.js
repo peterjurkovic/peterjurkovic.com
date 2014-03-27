@@ -13,7 +13,7 @@ function init(){
 	$(document).on("click", ".pj-email", appendEmailAddress );
 	$(document).on("click", ".pj-asyncload", loadOther );
 	$(document).on("click", "form a", sendEmail );
-	$(document).on("click", ".pj-project-tech, .pj-project-hover", showProjectDetail );
+	$(document).on("click", ".pj-project .pj-project-tech, .pj-project-hover", showProjectDetail );
 	$(document).on("mouseleave", ".pj-project", hideProjectDescr );
 	$(document).on("mouseenter", ".pj-project", showProjectDescr );
 	$(document).on("mouseleave", "#gallery a", imageLeave );

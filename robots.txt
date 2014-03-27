@@ -1,0 +1,6 @@
+User-Agent: *
+
+Disallow: /.#
+Disallow: /*.js$
+Disallow: /admin/
+Disallow: /upload/
