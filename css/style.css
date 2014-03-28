@@ -88,6 +88,7 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 .pj-skills{max-width: 420px;min-height: 329px;float: right;width: 100%;margin:55px 40px 0 0;}
 #skill-wrapp{max-width: 420px;height: 329px;position: relative;}
 #skill-wrapp *{position:absolute;background-repeat: no-repeat;}
+#skill-wrapp div:hover{cursor: pointer;}
 
 #skill-wrapp span{right:50px;font-size:.8em;display:inline-block;background:#272930;padding:2px 5px;}
 .pj-java{background-color:#e74c2e;background-image: url(../img/skill-java.png);background-position: 0 center}
@@ -126,19 +127,33 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 
 
 
+.pj-java.pj-selected,
 .pj-java:hover{background-position: -83px center;background-color: #fff;}
+.pj-html5.pj-selected,
 .pj-html5:hover{background-position: -41px center;background-color: #c7381c;}
+.pj-jquery-mobile.pj-selected,
 .pj-jquery-mobile:hover{background-position: center -75px;background-color: #eee;}
+.pj-maven.pj-selected,
 .pj-maven:hover{background-position: center -84px;background-color: #ddd;}
+.pj-php.pj-selected,
 .pj-php:hover{background-position: center -42px;background-color: #520ab5;}
+.pj-postgres.pj-selected,
 .pj-postgres:hover{background-position: center -32px;background-color: #fff;}
+.pj-hibernate.pj-selected,
 .pj-hibernate:hover{background-position: center -71px;background-color: #fff;}
+.pj-tika.pj-selected,
 .pj-tika:hover{background-position: center -42px;background-color: #b1c667;}
+.pj-photoshop.pj-selected,
 .pj-photoshop:hover{background-color: #313e6c;}
+.pj-spring.pj-selected,
 .pj-spring:hover{background-position: center -78px;background-color: #0c702f;}
+.pj-tomcat.pj-selected,
 .pj-tomcat:hover{background-position: center -54px;background-color: #3b903b;}
+.pj-android.pj-selected,
 .pj-android:hover{background-position: center -42px;background-color: #fff;}
+.pj-jquery.pj-selected,
 .pj-jquery:hover{background-position: 12px -101px;background-color: #be571e;}
+.pj-less.pj-selected,
 .pj-less:hover{background-position: 0 -40px;background-color: #b31b28;}
 
 
@@ -168,8 +183,12 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 	.pj-skills .pj-less{width:41px;height:41px;top:78px;left:10px;}
     .pj-skills .pj-java{background-position: -5px center;}
     .pj-skills .pj-spring{background-position: center -5px}
+
+    .pj-skills .pj-jquery.pj-selected,
     .pj-skills .pj-jquery:hover{background-position: 9px -101px;}
+    .pj-skills .pj-java.pj-selected,
     .pj-skills .pj-java:hover{background-position: -86px center;}
+    .pj-skills .pj-spring.pj-selected,
     .pj-skills .pj-spring:hover{background-position: center -5px}
 }
 
@@ -192,7 +211,7 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 	.pj-skills{max-width:100%;min-height:390px;}
 
 	#skill-wrapp{margin:auto;}
-	    .pj-text{max-width:320px;}
+    .pj-text{max-width:320px;}
 	.pj-box{float:none;min-width:100%;display:block;}
 	.pj-box ul{min-width:450px;width:100%display:inline-block;}
 	.pj-box ul li{margin:auto;}
@@ -224,8 +243,12 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 	.pj-skills .pj-less{width:41px;height:41px;top:78px;left:10px;}
     .pj-skills .pj-java{background-position: -5px center;}
     .pj-skills .pj-spring{background-position: center -5px}
+
+    .pj-skills .pj-jquery.pj-selected,
     .pj-skills .pj-jquery:hover{background-position: 9px -101px;}
+    .pj-skills .pj-java.pj-selected,
     .pj-skills .pj-java:hover{background-position: -86px center;}
+    .pj-skills .pj-spring.pj-selected,
     .pj-skills .pj-spring:hover{background-position: center -5px}
 }
 /* -----------------------------------
@@ -241,6 +264,7 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 
 .pj-project-hover,
 .pj-project-tech{position: absolute;display: none;}
+.pj-project .pj-project-tech .pj-padding{padding:2px 0 !important; }
 .pj-project-hover{width: 245px;height: 245px;top:0;z-index: 99;right:0;background-image: url(../img/project-hover.png);background-repeat:no-repeat;}
 .pj-project-tech{top:0;left: 0;max-width:85px;width:100%;z-index:99;background:#2b2d35;height:239px;padding:3px;opacity:.85;}
 .pj-project-tech div{background-image:none;}
@@ -285,8 +309,9 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 	padding:5px 10px 5px 0;
 }
 
-
-
+.pj-notfound{padding:20px 20px 20px 50px; display:inline-block;background:#fff url(../img/alert.png) no-repeat 10px center;color:#000;font-weight:bold;}
+#pj-selected-skills{margin-bottom:15px;}
+#pj-selected-skills div{cursor:pointer;display:inline-block;padding:8px 30px 8px 10px;background-image:url(../img/cross.png);background-position:calc(100% - 5px) center;background-repeat:no-repeat;font-weight:bold;}
 .pj-asyncload{font-weight:bold;text-decoration:underline;text-transform:uppercase;font-size:.9em;margin:10px;display:inline-block;padding:5px;}
 
 

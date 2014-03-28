@@ -1,13 +1,16 @@
 ErrorDocument 404 /error/index.php
 
 RewriteEngine On
-Options +FollowSymlinks
-RewriteCond %{HTTP_HOST} !^www\.
-RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+# Options +FollowSymlinks
+# RewriteCond %{HTTP_HOST} !^www\.
+# RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
-RewriteRule ^i\/(.*)$					/admin/page/img.php?q=$1 	[QSA,L]	
+# RewriteCond %{HTTP_HOST} !^www\.peterjurkovic\.com
+# RewriteRule ^(.*)$ http://www.peterjurkovic.com/$1 [R=301,L]
 
-RewriteRule ^/?$                            /index.php?p=home&a=home	[QSA,L]	
+RewriteRule ^i\/(.*)$	/admin/page/img.php?q=$1 	[QSA,L]	
+
+RewriteRule ^/?$        /index.php?p=home&a=home	[QSA,L]	
 
 RewriteCond %{REQUEST_FILENAME} -f [NC,OR]
 RewriteCond %{REQUEST_FILENAME} -d [NC]
@@ -15,25 +18,3 @@ RewriteRule .* - [L]
 
 RewriteRule ^([a-z]+)\/([a-z0-9\-]+)/?$			/index.php?lang=$1&p=$2&a=index 	[QSA,L]	
 RewriteRule ^([a-z]+)\/([a-z0-9\-]+)\/([0-9]+)\/(.*)/?$	/index.php?lang=$1&p=$2&a=$3 		[QSA,L]	
-
-
-#RewriteCond %{REQUEST_FILENAME} -d [NC]
-#RewriteRule .* - [L]
-
-#RewriteCond %{REQUEST_URI} !(^\/shop.*$)
-#RewriteRule ^([a-z0-9\-]+)/?$			/index.php?p=$1&a=index 	[QSA,L]	
-
-#RewriteCond %{REQUEST_URI} !(^\/shop.*$)
-#RewriteRule ^([a-z0-9\-]+)\/([0-9]+)\/(.*)/?$	/index.php?p=$1&a=$2 		[QSA,L]	
-
-#RewriteRule ^shop/?$ 											/index.php?p=shop&cn=home&cid=home	[QSA]
-#RewriteRule ^shop\/([a-z0-9\-]+)/?$								/index.php?p=shop&cn=$1&cid=index 	[QSA]
-#RewriteRule ^shop\/([a-z0-9\-]+)\/([0-9]+)/?$					/index.php?p=shop&cn=$1&s=$2&cid=0 	[QSA]
-#RewriteRule ^shop\/([a-z0-9\-]+)\/([0-9]+)\/([a-z0-9\-]+)/?$	/index.php?p=shop&cn=$1&cid=$2 		[QSA]
-#RewriteRule ^shop\/([a-z0-9\-]+)\/([0-9]+)\/([a-z0-9\-]+)\/([0-9]+)/?$	/index.php?p=shop&cn=$1&cid=$2&s=$4 [QSA]
-#RewriteRule ^shop\/(\d+)/(.*)?$								/index.php?p=shop&cn=pview&pid=$1 	[L,QSA]
-
-	
-
-		
-

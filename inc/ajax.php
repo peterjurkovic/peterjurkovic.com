@@ -89,6 +89,31 @@ try{
           );
         break;
 
+        /* Skills filtering */
+        case 4:
+            $ids = !isset($_GET['items']) ? array() : $_GET['items']; 
+            $html = '';
+
+            if( ! empty($ids) ){
+               $html .= '<div id="pj-selected-skills">'.  getHTMLSkillsByIDs($ids). '</div>';
+            }
+            $projects = filterProjectBySkills( $ids );
+
+            if(strlen($projects) == 0){
+              $html .= '<p class="pj-notfound">'.getMessage("noProjectFound").'</p>';
+            }else{
+              $html .= $projects;  
+            }
+
+            
+
+
+            $data = array(
+            "err" => 0,
+            "html" =>  $html
+          );
+        break;
+
 
 
       default:
@@ -97,7 +122,7 @@ try{
     }
     
 }catch(MysqlException $ex){
-    $data = array( "err" => 1, "msg" => $str[$lang]["err_db"] );
+    $data = array( "err" => 1, "msg" => $ex->getMessage() );
 }catch(Exception $ex){
     $data = array( "err" => 1, "msg" => $ex->getMessage() );
 }

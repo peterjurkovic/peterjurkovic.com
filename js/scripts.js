@@ -10,6 +10,7 @@ function init(){
 		swapColors($skills);
 	}, 500);
 	$skills.hover(showSkillTip, hideSkillTip) ;
+	$skills.on("click", onSkillClicked );
 	$(document).on("click", ".pj-email", appendEmailAddress );
 	$(document).on("click", ".pj-asyncload", loadOther );
 	$(document).on("click", "form a", sendEmail );
@@ -18,9 +19,56 @@ function init(){
 	$(document).on("mouseenter", ".pj-project", showProjectDescr );
 	$(document).on("mouseleave", "#gallery a", imageLeave );
 	$(document).on("mouseenter", "#gallery a", imageEnter );
+	$(document).on("refreshfilter", refreshSkillFilter);
+	$(document).on('click', '#pj-selected-skills div', onRemoveSkillClicked);
 	$('<div class="remodal" data-remodal-id="modal"><article></article></div>').appendTo('body');
 	$('.remodal').remodal();
 	initProjectDetail();
+}
+
+function onSkillClicked(){
+	var $this = $(this);
+	$this.toggleClass('pj-selected');
+	$(document).trigger("refreshfilter");
+	return false;
+}
+
+function onRemoveSkillClicked(){
+	var $this = $(this),
+	    id = $this.attr('data-id');
+		$('#skill-wrapp').find('[data-id='+id+']').removeClass('pj-selected');
+	$(document).trigger("refreshfilter");
+	return false;
+}
+function refreshSkillFilter(){
+	showLoader();
+	var data = {
+			items : getSelectedSkilss(),
+			lang : $('body').attr("data-lang"),
+			act : 4
+	};
+	executeRequest( data , function(json) {
+		json = $.parseJSON(json);
+		if(json.err == 0){
+			$('#pj-project-wrapp').html(json.html);
+			renderProjects(false);
+			var $loadOtherBtn = $('.pj-asyncload');
+			if(data.items.length === 0){
+				$loadOtherBtn.removeClass('hidden');
+			}else{
+				$loadOtherBtn.addClass('hidden');
+			}
+		}
+	});
+	return false;
+}
+
+function getSelectedSkilss(){
+	var selected = [];
+	$('#skill-wrapp div.pj-selected').each(function(){
+		selected.push($(this).attr('data-id'));
+	});
+	return selected;
 }
 
 
@@ -142,7 +190,7 @@ function renderProjects(timeout){
 		$wrapp.fadeOut();
 		setTimeout(function() {$items.removeClass("hidden");$wrapp.fadeIn(1000)}, 1000);
 	}else{
-		$items.removeClass("hidden").fadeOut().fadeIn(1500);
+		$items.removeClass("hidden").fadeOut().fadeIn(1000);
 	}
 }
 
@@ -176,7 +224,7 @@ function loadOther(){
 		if(json.err == 0){
 			$('.pj-projects').append(json.html);
 			renderProjects(false);
-			$this.remove();
+			$this.addClass('hidden');
 		}
 	});
 	return false;
@@ -217,7 +265,7 @@ function showProjectDetail(){
 		data = {
 			id : (isNaN(id) ?  $this.parent().attr('data-id') : id ),
 			lang : $('body').attr("data-lang"),
-			act : 3,
+			act : 3
 	};
 	setTimeout(function(){
 		executeRequest(data, function(json) {
