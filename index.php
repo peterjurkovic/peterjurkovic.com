@@ -13,8 +13,9 @@
 		<meta property="og:site_name" content="www.peterjurkovic.com" />
 		<meta property="og:type" content="website" />
 		<meta property="og:url" content="http://www.peterjurkovic.com" />
+		<meta property="og:description"  content="<?php  echo $meta["header_${lang}"]; ?>" /> 
+		<meta property="og:image" content="http://www.peterjurkovic.com/img/sc.png" />
 		<meta property="fb:app_id"  content="148300471890790" /> 
-		<meta property="og:image" content="/img/sc.png" />
 		
 		<link rel="author" href="https://plus.google.com/115805190454646553254/about"  title="Peter Jurkovič"/>
 		<link rel="shortcut icon" href="/img/icon.png" />
