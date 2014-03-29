@@ -9,21 +9,31 @@ function init(){
 	setTimeout(function(){
 		swapColors($skills);
 	}, 500);
-	$skills.hover(showSkillTip, hideSkillTip) ;
+	
+	if(!$.browser.mobile){
+		console.log('is desktop');
+		$skills.hover(showSkillTip, hideSkillTip) ;
+		$(document).on("mouseleave", ".pj-project", hideProjectDescr );
+		$(document).on("mouseenter", ".pj-project", showProjectDescr );
+		$(document).on("mouseleave", "#gallery a", imageLeave );
+		$(document).on("mouseenter", "#gallery a", imageEnter );
+	}
+
+
 	$skills.on("click", onSkillClicked );
 	$(document).on("click", ".pj-email", appendEmailAddress );
 	$(document).on("click", ".pj-asyncload", loadOther );
 	$(document).on("click", "form a", sendEmail );
-	$(document).on("click", ".pj-project .pj-project-tech, .pj-project-hover", showProjectDetail );
-	$(document).on("mouseleave", ".pj-project", hideProjectDescr );
-	$(document).on("mouseenter", ".pj-project", showProjectDescr );
-	$(document).on("mouseleave", "#gallery a", imageLeave );
-	$(document).on("mouseenter", "#gallery a", imageEnter );
+	$(document).on("click", ".pj-project", showProjectDetail );1
 	$(document).on("refreshfilter", refreshSkillFilter);
 	$(document).on('click', '#pj-selected-skills div', onRemoveSkillClicked);
+
 	$('<div class="remodal" data-remodal-id="modal"><article></article></div>').appendTo('body');
 	$('.remodal').remodal();
 	initProjectDetail();
+	$(window).on('resize', function(){
+		console.log('width: ' + $(document).outerWidth());
+	})
 }
 
 function onSkillClicked(){
@@ -35,7 +45,7 @@ function onSkillClicked(){
 
 function onRemoveSkillClicked(){
 	var $this = $(this),
-	    id = $this.attr('data-id');
+	    id = getId($this);
 		$('#skill-wrapp').find('[data-id='+id+']').removeClass('pj-selected');
 	$(document).trigger("refreshfilter");
 	return false;
@@ -66,7 +76,7 @@ function refreshSkillFilter(){
 function getSelectedSkilss(){
 	var selected = [];
 	$('#skill-wrapp div.pj-selected').each(function(){
-		selected.push($(this).attr('data-id'));
+		selected.push( getId($(this)) );
 	});
 	return selected;
 }
@@ -82,6 +92,9 @@ function isOnLeftSide($this){
 }
 
 function showProjectDescr(e){
+	if(isWindowWithSmall()){
+		return false;
+	}
 	e.preventDefault();
 	var $this = $(this),
 		isLeftSide = isOnLeftSide($this);
@@ -98,6 +111,9 @@ function showProjectDescr(e){
 }
 
 function hideProjectDescr(){
+	if(isWindowWithSmall()){
+		return false;
+	}
 	var $this = $(this);
 	$('.pj-project').not($this).removeClass('pj-transparent');
 	$this.find('.pj-project-hover, .pj-project-tech').hide();
@@ -196,9 +212,10 @@ function renderProjects(timeout){
 
 
 jQuery.fn.center = function () {
+    console.log(this.outerWidth());
     this.css("position","absolute");
-    this.css("top", (($(window).height() - this.outerHeight()) / 2) + $(window).scrollTop() + "px");
-    this.css("left", (($(window).width() - this.outerWidth()) / 2) + $(window).scrollLeft() + "px");
+    this.css("top", (($(window).height() - this.outerHeight()- ($.browser.mobile ? 100 : 0 )) / 2) + $(window).scrollTop() + "px");
+    this.css("left", (($(window).width() - this.outerWidth() - ($.browser.mobile ? 100 : 0 ))  / 2) + $(window).scrollLeft() + "px");
     return this;
 }
 
@@ -257,23 +274,24 @@ function sendEmail(){
 
 function showProjectDetail(){
 	var id = null;
-	if(arguments.length === 1){
+	if(arguments.length === 1 && !isNaN(arguments[0])){
 		id = parseInt( arguments[0], 10);
+	}else{
+		id = getId( $(this) );
 	}
+	console.log(id);
 	showLoader();
-	var $this = $(this),
-		data = {
-			id : (isNaN(id) ?  $this.parent().attr('data-id') : id ),
+	setTimeout(function(){
+		executeRequest({
+			id : id,
 			lang : $('body').attr("data-lang"),
 			act : 3
-	};
-	setTimeout(function(){
-		executeRequest(data, function(json) {
+		}, function(json) {
 			json = $.parseJSON(json);
 			if(json.err == 0){
 			 	$('.remodal').find('article').html(json.html);
 			 	if(!isHashSet()){
-			 		location.hash = 'project-' + data.id;
+			 		location.hash = 'project-' + id;
 			 	}
 			 	getModalBoxInstance().open();
 			}
@@ -369,3 +387,17 @@ function imageLeave() {
 	$('#gallery a').removeClass('pj-transparent');
 	return false;
 }
+
+function isWindowWithSmall(){
+	return $(document).outerWidth() < 480;
+}
+
+function isMobileDevice(){
+	
+}
+
+function getId(e){
+	return e.attr('data-id');
+}
+
+!function(a,b){"use strict";var c,d;if(a.uaMatch=function(a){a=a.toLowerCase();var b=/(opr)[\/]([\w.]+)/.exec(a)||/(chrome)[ \/]([\w.]+)/.exec(a)||/(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec(a)||/(webkit)[ \/]([\w.]+)/.exec(a)||/(opera)(?:.*version|)[ \/]([\w.]+)/.exec(a)||/(msie) ([\w.]+)/.exec(a)||a.indexOf("trident")>=0&&/(rv)(?::| )([\w.]+)/.exec(a)||a.indexOf("compatible")<0&&/(mozilla)(?:.*? rv:([\w.]+)|)/.exec(a)||[],c=/(ipad)/.exec(a)||/(iphone)/.exec(a)||/(android)/.exec(a)||/(windows phone)/.exec(a)||/(win)/.exec(a)||/(mac)/.exec(a)||/(linux)/.exec(a)||[];return{browser:b[3]||b[1]||"",version:b[2]||"0",platform:c[0]||""}},c=a.uaMatch(b.navigator.userAgent),d={},c.browser&&(d[c.browser]=!0,d.version=c.version,d.versionNumber=parseInt(c.version)),c.platform&&(d[c.platform]=!0),(d.android||d.ipad||d.iphone||d["windows phone"])&&(d.mobile=!0),(d.mac||d.linux||d.win)&&(d.desktop=!0),(d.chrome||d.opr||d.safari)&&(d.webkit=!0),d.rv){var e="msie";c.browser=e,d[e]=!0}if(d.opr){var f="opera";c.browser=f,d[f]=!0}if(d.safari&&d.android){var g="android";c.browser=g,d[g]=!0}d.name=c.browser,d.platform=c.platform,a.browser=d}(jQuery,window);
