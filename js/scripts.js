@@ -11,7 +11,6 @@ function init(){
 	}, 500);
 	
 	if(!$.browser.mobile){
-		console.log('is desktop');
 		$skills.hover(showSkillTip, hideSkillTip) ;
 		$(document).on("mouseleave", ".pj-project", hideProjectDescr );
 		$(document).on("mouseenter", ".pj-project", showProjectDescr );
@@ -24,16 +23,13 @@ function init(){
 	$(document).on("click", ".pj-email", appendEmailAddress );
 	$(document).on("click", ".pj-asyncload", loadOther );
 	$(document).on("click", "form a", sendEmail );
-	$(document).on("click", ".pj-project", showProjectDetail );1
+	$(document).on("click", ".pj-project", showProjectDetail );
 	$(document).on("refreshfilter", refreshSkillFilter);
 	$(document).on('click', '#pj-selected-skills div', onRemoveSkillClicked);
 
 	$('<div class="remodal" data-remodal-id="modal"><article></article></div>').appendTo('body');
 	$('.remodal').remodal();
 	initProjectDetail();
-	$(window).on('resize', function(){
-		console.log('width: ' + $(document).outerWidth());
-	})
 }
 
 function onSkillClicked(){
@@ -212,7 +208,6 @@ function renderProjects(timeout){
 
 
 jQuery.fn.center = function () {
-    console.log(this.outerWidth());
     this.css("position","absolute");
     this.css("top", (($(window).height() - this.outerHeight()- ($.browser.mobile ? 100 : 0 )) / 2) + $(window).scrollTop() + "px");
     this.css("left", (($(window).width() - this.outerWidth() - ($.browser.mobile ? 100 : 0 ))  / 2) + $(window).scrollLeft() + "px");
@@ -279,7 +274,6 @@ function showProjectDetail(){
 	}else{
 		id = getId( $(this) );
 	}
-	console.log(id);
 	showLoader();
 	setTimeout(function(){
 		executeRequest({
@@ -400,4 +394,103 @@ function getId(e){
 	return e.attr('data-id');
 }
 
-!function(a,b){"use strict";var c,d;if(a.uaMatch=function(a){a=a.toLowerCase();var b=/(opr)[\/]([\w.]+)/.exec(a)||/(chrome)[ \/]([\w.]+)/.exec(a)||/(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec(a)||/(webkit)[ \/]([\w.]+)/.exec(a)||/(opera)(?:.*version|)[ \/]([\w.]+)/.exec(a)||/(msie) ([\w.]+)/.exec(a)||a.indexOf("trident")>=0&&/(rv)(?::| )([\w.]+)/.exec(a)||a.indexOf("compatible")<0&&/(mozilla)(?:.*? rv:([\w.]+)|)/.exec(a)||[],c=/(ipad)/.exec(a)||/(iphone)/.exec(a)||/(android)/.exec(a)||/(windows phone)/.exec(a)||/(win)/.exec(a)||/(mac)/.exec(a)||/(linux)/.exec(a)||[];return{browser:b[3]||b[1]||"",version:b[2]||"0",platform:c[0]||""}},c=a.uaMatch(b.navigator.userAgent),d={},c.browser&&(d[c.browser]=!0,d.version=c.version,d.versionNumber=parseInt(c.version)),c.platform&&(d[c.platform]=!0),(d.android||d.ipad||d.iphone||d["windows phone"])&&(d.mobile=!0),(d.mac||d.linux||d.win)&&(d.desktop=!0),(d.chrome||d.opr||d.safari)&&(d.webkit=!0),d.rv){var e="msie";c.browser=e,d[e]=!0}if(d.opr){var f="opera";c.browser=f,d[f]=!0}if(d.safari&&d.android){var g="android";c.browser=g,d[g]=!0}d.name=c.browser,d.platform=c.platform,a.browser=d}(jQuery,window);
+
+
+
+(function( jQuery, window, undefined ) {
+"use strict";
+
+var matched, browser;
+
+jQuery.uaMatch = function( ua ) {
+  ua = ua.toLowerCase();
+
+	var match = /(opr)[\/]([\w.]+)/.exec( ua ) ||
+		/(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+		/(version)[ \/]([\w.]+).*(safari)[ \/]([\w.]+)/.exec(ua) ||
+		/(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+		/(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+		/(msie) ([\w.]+)/.exec( ua ) ||
+		ua.indexOf("trident") >= 0 && /(rv)(?::| )([\w.]+)/.exec( ua ) ||
+		ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+		[];
+
+	var platform_match = /(ipad)/.exec( ua ) ||
+		/(iphone)/.exec( ua ) ||
+		/(android)/.exec( ua ) ||
+		/(windows phone)/.exec(ua) ||
+		/(win)/.exec( ua ) ||
+		/(mac)/.exec( ua ) ||
+		/(linux)/.exec( ua ) ||
+		[];
+
+	return {
+		browser: match[ 3 ] || match[ 1 ] || "",
+		version: match[ 2 ] || "0",
+		platform: platform_match[0] || ""
+	};
+};
+
+matched = jQuery.uaMatch( window.navigator.userAgent );
+browser = {};
+
+if ( matched.browser ) {
+	browser[ matched.browser ] = true;
+	browser.version = matched.version;
+	browser.versionNumber = parseInt(matched.version);
+}
+
+if ( matched.platform ) {
+	browser[ matched.platform ] = true;
+}
+
+// These are all considered mobile platforms, meaning they run a mobile browser
+if ( browser.android || browser.ipad || browser.iphone || browser[ "windows phone" ] ) {
+	browser.mobile = true;
+}
+
+// These are all considered desktop platforms, meaning they run a desktop browser
+if ( browser.mac || browser.linux || browser.win ) {
+	browser.desktop = true;
+}
+
+// Chrome, Opera 15+ and Safari are webkit based browsers
+if ( browser.chrome || browser.opr || browser.safari ) {
+	browser.webkit = true;
+}
+
+// IE11 has a new token so we will assign it msie to avoid breaking changes
+if ( browser.rv )
+{
+	var ie = 'msie';
+
+	matched.browser = ie;
+	browser[ie] = true;
+}
+
+// Opera 15+ are identified as opr
+if ( browser.opr )
+{
+	var opera = 'opera';
+
+	matched.browser = opera;
+	browser[opera] = true;
+}
+
+// Stock Android browsers are marked as safari on Android.
+if ( browser.safari && browser.android )
+{
+	var android = 'android';
+
+	matched.browser = android;
+	browser[android] = true;
+}
+
+// Assign the name and platform variable
+browser.name = matched.browser;
+browser.platform = matched.platform;
+
+
+jQuery.browser = browser;
+
+})( jQuery, window );
