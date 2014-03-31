@@ -13,7 +13,7 @@
 			"unexpectedError" => "Some error occured, try it again leater please",
 			"invalidDataError" => "Invalid data",
 			"emailSent" => "Your message was sent successfully",
-			"noProjectFound" => "No project found for given set of technologies."
+			"noProjectFound" => "No project was found for given set of technologies."
 		);
 
 		$key = $args[0];
