@@ -30,6 +30,7 @@ function init(){
 	$('<div class="remodal" data-remodal-id="modal"><article></article></div>').appendTo('body');
 	$('.remodal').remodal();
 	initProjectDetail();
+	executeFilterRequest(false);
 }
 
 function onSkillClicked(){
@@ -47,7 +48,13 @@ function onRemoveSkillClicked(){
 	return false;
 }
 function refreshSkillFilter(){
-	showLoader();
+	return executeFilterRequest(true);
+}
+
+function executeFilterRequest(showProgress){
+	if(showProgress){
+		showLoader();
+	}
 	var data = {
 			items : getSelectedSkilss(),
 			lang : $('body').attr("data-lang"),
@@ -66,7 +73,6 @@ function refreshSkillFilter(){
 			}
 		}
 	});
-	return false;
 }
 
 function getSelectedSkilss(){

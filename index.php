@@ -97,9 +97,7 @@
 			<div class="page-wrapp">
 				<h2><?php echo printPageTitle(34); ?></h2>
 				
-				<div id="pj-project-wrapp" class="pj-projects">
-					<?php echo printProjects(); ?>
-				</div>
+				<div id="pj-project-wrapp" class="pj-projects"></div>
 				<div class="clearfix"></div>
 				<a href="" class="pj-asyncload" data-lang="<?php echo $lang; ?>">Load other</a>
 			</div>
