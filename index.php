@@ -19,7 +19,7 @@
 		
 		<link rel="author" href="https://plus.google.com/115805190454646553254/about"  title="Peter Jurkovič"/>
 		<link rel="shortcut icon" href="/img/icon.png" />
-		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/style<?php echo (isset($_GET['st']) ?  $_GET['st'] : '' ); ?>.css" />
 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 		<script src="js/jquery.transit.min.js"></script>

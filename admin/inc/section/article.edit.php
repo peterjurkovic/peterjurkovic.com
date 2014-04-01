@@ -62,7 +62,7 @@
     
         <a href="./index.php?p=article&amp;sp=new&amp;aid=<?php echo $aid; ?>" class="btn2 newPage" title="Pridať stránku do tejto sekcie">Pridať stránku do tejto sekcie</a>
         <?php 
-        $nav = new Navigator($count, $s , '/index.php?'.preg_replace("/&s=[0-9]/", "", $_SERVER['QUERY_STRING']) , $config["adminPagi"]);
+        $nav = new Navigator($count, $s , '/admin/index.php?'.preg_replace("/&s=[0-9]/", "", $_SERVER['QUERY_STRING']) , $config["adminPagi"]);
         $nav->setSeparator("&amp;s=");
         echo $nav->simpleNumNavigator();
         ?>
