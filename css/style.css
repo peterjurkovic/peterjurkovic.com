@@ -92,9 +92,9 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 
 #skill-wrapp span{right:50px;font-size:.8em;display:inline-block;background:#272930;padding:2px 5px;}
 .pj-java{background-color:#e74c2e;background-image: url(../img/skill-java.png);background-position: 0 center}
-.pj-html5{background-color:#cf4858;background-image: url(../img/skill-html5.png);background-position: 0 center}
-.pj-jquery-mobile{background-color:#b31b28;background-image: url(../img/skill-jquerymobile.png);background-position: center 0}
-.pj-maven{background-color:#f18729;background-image: url(../img/skill-maven.png);background-position: center 0}
+.pj-html5{background-color:#b31b28;background-image: url(../img/skill-html5.png);background-position: 0 center}
+.pj-jquery-mobile{background-color:#903f60;background-image: url(../img/skill-jquerymobile.png);background-position: center 0}
+.pj-maven{background-color:#f18729;background-image: url(../img/skill-maven.png);background-position: center 10px}
 .pj-php{background-color:#80628b;background-image: url(../img/skill-php.png);background-position: center 0}
 .pj-postgres{background-color:#544858;background-image: url(../img/skill-postgres.png);background-position: center 0}
 .pj-hibernate{background-color:#1b6a81;background-image: url(../img/skill-hibernate.png);background-position: center 0}
@@ -103,18 +103,26 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 .pj-spring{background-color:#55a370;background-image: url(../img/skill-spring.png);background-position: center 0}
 .pj-tomcat{background-color:#b1c667;background-image: url(../img/skill-tomcat.png);background-position: center 0}
 .pj-android{background-color:#a2b217;background-image: url(../img/skill-android.png);background-position: center 0}
-.pj-jquery{background-color:#f2c230;background-image: url(../img/skill-jquery.png);background-position: 10px 0 }
+.pj-jquery{background-color:#f2c230;background-image: url(../img/skill-jquery.png);background-position: 2px -15px }
 .pj-less{background-color:#f4ac42;background-image: url(../img/skill-less.png);}
 .pj-mysql{background-color:#015A84;}
 .pj-google-apis{background-color:#4584EE;}
 .pj-basex{background-color: #801406;}
-.pj-jsoup{background-color: #416196; }
+.pj-jsoup{background-color: #416196;}
+.pj-angularjs{background-color: #E42837;background-image: url(../img/angular.png);background-position:center -75px;}
+.pj-bower{background-color:#FFCC2F;background-image: url(../img/bower.png);background-position:center 4px;}
+.pj-bootstrap{background-color:#cf4858;background-image: url(../img/bootstrap.png);background-position:center 12px;}
+.pj-grunt{background-color:#3f97a1;background-image: url(../img/grunt.png);background-position:center -90px;}
 
+.pj-skills .pj-grunt{width:43px;height:55px;top:216px;left:42px;}
+.pj-skills .pj-bootstrap{width:83px;height:45px;top:-10px;left:168px;}
+.pj-skills .pj-bower{width:48px;height:45px;top:4px;left:48px;}
+.pj-skills .pj-maven{width:72px;height:108px;top:11px;left:96px;}
 .pj-skills .pj-java{width:83px;height:168px;top:35px;left:168px;}
 .pj-skills .pj-html5{width:43px;height:119px;top:0px;left:251px;}
 .pj-skills .pj-jquery-mobile{width:78px;height:75px;top:44px;left:294px;}
-.pj-skills .pj-maven{width:84px;height:84px;top:119px;left:251px;}
-.pj-skills .pj-php{width:84px;height:43px;top:118px;left:335px;}
+.pj-skills .pj-angularjs{width:84px;height:84px;top:119px;left:251px;}
+.pj-skills .pj-php{width:84px;height:42px;top:119px;left:335px;}
 .pj-skills .pj-postgres{width:35px;height:33px;top:161px;left:335px;}
 .pj-skills .pj-hibernate{width:156px;height:71px;top:203px;left:168px;}
 .pj-skills .pj-tika{width:43px;height:42px;top:243px;left:125px;}
@@ -122,19 +130,29 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 .pj-skills .pj-spring{width:83px;height:83px;top:160px;left:85px;}
 .pj-skills .pj-tomcat{width:60px;height:56px;top:160px;left:25px;}
 .pj-skills .pj-android{width:168px;height:41px;top:119px;left:0px;}
-.pj-skills .pj-jquery{width:85px;height:100px;top:19px;left:83px;}
-.pj-skills .pj-less{width:41px;height:41px;top:78px;left:42px;}
+.pj-skills .pj-jquery{width:65px;height:70px;top:49px;left:31px;}
+.pj-skills .pj-less{width:41px;height:41px;top:78px;left:-10px;}
 
 
+.pj-grunt.pj-selected,
+.pj-grunt:hover{background-color:#fff;background-position:center -10px;}
 
-.pj-java.pj-selected,
+.pj-bootstrap.pj-selected,
+.pj-bootstrap:hover{background-color:#493568;}
+
+.pj-bower.pj-selected,
+.pj-bower:hover{background-color:#fff;background-position:center -38px;}
+
+.pj-angularjs.pj-selected,
+.pj-angularjs:hover{background-color:#fff;background-position:center 5px;}
+.pj-java.pj-selected
 .pj-java:hover{background-position: -83px center;background-color: #fff;}
 .pj-html5.pj-selected,
 .pj-html5:hover{background-position: -41px center;background-color: #c7381c;}
 .pj-jquery-mobile.pj-selected,
 .pj-jquery-mobile:hover{background-position: center -75px;background-color: #eee;}
 .pj-maven.pj-selected,
-.pj-maven:hover{background-position: center -84px;background-color: #ddd;}
+.pj-maven:hover{background-position: center -74px;background-color: #ddd;}
 .pj-php.pj-selected,
 .pj-php:hover{background-position: center -42px;background-color: #520ab5;}
 .pj-postgres.pj-selected,
@@ -152,7 +170,7 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 .pj-android.pj-selected,
 .pj-android:hover{background-position: center -42px;background-color: #fff;}
 .pj-jquery.pj-selected,
-.pj-jquery:hover{background-position: 12px -101px;background-color: #be571e;}
+.pj-jquery:hover{background-position: 5px -115px;background-color: #be571e;}
 .pj-less.pj-selected,
 .pj-less:hover{background-position: 0 -40px;background-color: #b31b28;}
 
@@ -181,15 +199,15 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 	.pj-skills .pj-android{width:125px;height:41px;top:119px;left:0px;}
 	.pj-skills .pj-jquery{width:75px;height:100px;top:19px;left:50px;}
 	.pj-skills .pj-less{width:41px;height:41px;top:78px;left:10px;}
-    .pj-skills .pj-java{background-position: -5px center;}
-    .pj-skills .pj-spring{background-position: center -5px}
+  .pj-skills .pj-java{background-position: -5px center;}
+  .pj-skills .pj-spring{background-position: center -5px}
 
-    .pj-skills .pj-jquery.pj-selected,
-    .pj-skills .pj-jquery:hover{background-position: 9px -101px;}
-    .pj-skills .pj-java.pj-selected,
-    .pj-skills .pj-java:hover{background-position: -86px center;}
-    .pj-skills .pj-spring.pj-selected,
-    .pj-skills .pj-spring:hover{background-position: center -5px}
+  .pj-skills .pj-jquery.pj-selected,
+  .pj-skills .pj-jquery:hover{background-position: 9px -101px;}
+  .pj-skills .pj-java.pj-selected,
+  .pj-skills .pj-java:hover{background-position: -86px center;}
+  .pj-skills .pj-spring.pj-selected,
+  .pj-skills .pj-spring:hover{background-position: center -5px}
 }
 
 
