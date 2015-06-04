@@ -185,10 +185,14 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 
 @media all and (max-width: 900px) and (min-width: 675px) {
      #skill-wrapp span{right:5px;top:5px}
+  .pj-skills .pj-angularjs{width:64px;height:84px;top:119px;left:198px;}
+  .pj-skills .pj-grunt{width:38px;left:15px;}
+	.pj-skills .pj-bootstrap{width:73px;height:45px;top:-10px;left:125px;}
+	.pj-skills .pj-bower{width:44px;height:45px;top:33px;left:6px;}
 	.pj-skills .pj-java{width:73px;height:168px;top:35px;left:125px;}
 	.pj-skills .pj-html5{width:43px;height:119px;top:0px;left:198px;}
 	.pj-skills .pj-jquery-mobile{width:68px;height:75px;top:44px;left:241px;}
-	.pj-skills .pj-maven{width:64px;height:84px;top:119px;left:198px;}
+	.pj-skills .pj-maven{width:75px;height:84px;top:50px;left:50px;}
 	.pj-skills .pj-php{width:54px;height:43px;top:118px;left:262px;}
 	.pj-skills .pj-postgres{width:35px;height:33px;top:161px;left:262px;}
 	.pj-skills .pj-hibernate{width:136px;height:72px;top:203px;left:125px;}
@@ -197,8 +201,8 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
 	.pj-skills .pj-spring{width:73px;height:73px;top:160px;left:52px;}
 	.pj-skills .pj-tomcat{width:40px;height:56px;top:160px;left:12px;}
 	.pj-skills .pj-android{width:125px;height:41px;top:119px;left:0px;}
-	.pj-skills .pj-jquery{width:75px;height:100px;top:19px;left:50px;}
-	.pj-skills .pj-less{width:41px;height:41px;top:78px;left:10px;}
+	.pj-skills .pj-jquery{width:75px;height:55px;top:0px;left:50px;}
+	.pj-skills .pj-less{width:40px;height:41px;top:78px;left:10px;}
   .pj-skills .pj-java{background-position: -5px center;}
   .pj-skills .pj-spring{background-position: center -5px}
 
@@ -208,6 +212,10 @@ nav .pj-social{max-width: 260px;float:right;width: 100%;list-style:none;text-ali
   .pj-skills .pj-java:hover{background-position: -86px center;}
   .pj-skills .pj-spring.pj-selected,
   .pj-skills .pj-spring:hover{background-position: center -5px}
+  
+  .pj-maven{background-position: center -04px;}
+  .pj-maven.pj-selected,
+	.pj-maven:hover{background-position: center -88px;}
 }
 
 
